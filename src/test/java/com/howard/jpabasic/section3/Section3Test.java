@@ -1,9 +1,6 @@
 package com.howard.jpabasic.section3;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.PersistenceUnit;
+import jakarta.persistence.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -214,6 +211,90 @@ public class Section3Test {
     @Test
     @DisplayName("flush - JPQL 쿼리를 실행하기 전에 flush가 발생한다.")
     public void flushWithJPQLTest() {
+        try {
+            /* Transaction 시작 */
+            etx.begin();
+
+            /* Entity 생성 및 persist (1) */
+            Member memberA = new Member();
+            memberA.setUsername("ryan");
+            memberA.setAge(25);
+            em.persist(memberA);
+
+            /* Entity 생성 및 persist (2) */
+            Member memberB = new Member();
+            memberB.setUsername("choonsik");
+            memberB.setAge(20);
+            em.persist(memberB);
+
+            /* JPQL 쿼리 실행 이전에 flush 가 발생한다. */
+            System.out.println("-----------------------");
+            List<Member> members = em
+                    .createQuery("select m from Member m where m.age > 10", Member.class)
+                    .getResultList();
+            System.out.println("-----------------------");
+            for (Member member : members) {
+                System.out.println("Member.id = " + member.getId());
+                System.out.println("Member.username = " + member.getUsername());
+                System.out.println("Member.age = " + member.getAge());
+            }
+
+            /* Transaction commit */
+            etx.commit();
+        } catch(Exception e) {
+            etx.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Test
+    @DisplayName("FlushModeType.AUTO - JPQL 쿼리를 실행하기 전에 flush가 발생한다.")
+    public void flushModeAutoWithJPQLTest() {
+        /* FlushTypeMode.AUTO 설정 */
+        em.setFlushMode(FlushModeType.AUTO);
+        try {
+            /* Transaction 시작 */
+            etx.begin();
+
+            /* Entity 생성 및 persist (1) */
+            Member memberA = new Member();
+            memberA.setUsername("ryan");
+            memberA.setAge(25);
+            em.persist(memberA);
+
+            /* Entity 생성 및 persist (2) */
+            Member memberB = new Member();
+            memberB.setUsername("choonsik");
+            memberB.setAge(20);
+            em.persist(memberB);
+
+            /* JPQL 쿼리 실행 이전에 flush 가 발생한다. */
+            System.out.println("-----------------------");
+            List<Member> members = em
+                    .createQuery("select m from Member m where m.age > 10", Member.class)
+                    .getResultList();
+            System.out.println("-----------------------");
+            for (Member member : members) {
+                System.out.println("Member.id = " + member.getId());
+                System.out.println("Member.username = " + member.getUsername());
+                System.out.println("Member.age = " + member.getAge());
+            }
+
+            /* Transaction commit */
+            etx.commit();
+        } catch(Exception e) {
+            etx.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Test
+    @DisplayName("FlushModeType.COMMIT - JPQL 쿼리를 실행하기 전에 flush 가 발생하지 않고, Commit 시 발생한다.")
+    public void flushModeCommitWithJPQLTest() {
+        /* FlushTypeMode.AUTO 설정 */
+        em.setFlushMode(FlushModeType.COMMIT);
         try {
             /* Transaction 시작 */
             etx.begin();
