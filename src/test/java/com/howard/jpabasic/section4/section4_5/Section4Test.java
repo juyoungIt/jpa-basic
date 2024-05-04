@@ -30,7 +30,7 @@ public class Section4Test {
     @Test
     @DisplayName("Table의 생성만 간단히 확인해기 위해 작성한 빈 테스트 메서드")
     public void emptyTest() {
-        
+
     }
 
 }
