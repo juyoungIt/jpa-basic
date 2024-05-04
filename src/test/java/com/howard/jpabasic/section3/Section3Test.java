@@ -230,7 +230,7 @@ public class Section3Test {
             /* JPQL 쿼리 실행 이전에 flush 가 발생한다. */
             System.out.println("-----------------------");
             List<Member> members = em
-                    .createQuery("select m from Member m where m.age > 10", Member.class)
+                    .createQuery("select m from MemberKeyById m where m.age > 10", Member.class)
                     .getResultList();
             System.out.println("-----------------------");
             for (Member member : members) {
@@ -272,7 +272,7 @@ public class Section3Test {
             /* JPQL 쿼리 실행 이전에 flush 가 발생한다. */
             System.out.println("-----------------------");
             List<Member> members = em
-                    .createQuery("select m from Member m where m.age > 10", Member.class)
+                    .createQuery("select m from MemberKeyById m where m.age > 10", Member.class)
                     .getResultList();
             System.out.println("-----------------------");
             for (Member member : members) {
@@ -314,7 +314,7 @@ public class Section3Test {
             /* JPQL 쿼리 실행 이전에 flush 가 발생한다. */
             System.out.println("-----------------------");
             List<Member> members = em
-                    .createQuery("select m from Member m where m.age > 10", Member.class)
+                    .createQuery("select m from MemberKeyById m where m.age > 10", Member.class)
                     .getResultList();
             System.out.println("-----------------------");
             for (Member member : members) {
