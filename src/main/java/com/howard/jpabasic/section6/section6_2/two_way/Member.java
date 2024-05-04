@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class MemberTwoWay {
+public class Member {
 
     @Id @GeneratedValue
     private Long id;
@@ -16,6 +16,6 @@ public class MemberTwoWay {
     /* -> 읽기 전용 필드를 사용해서 양방향처럼 사용하는 전략이라고 이해하면 된다. */
     @ManyToOne
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
-    private TeamTwoWay team;
+    private Team team;
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class TeamOneWay {
+public class Team {
 
     @Id @GeneratedValue
     private Long id;
@@ -17,6 +17,6 @@ public class TeamOneWay {
 
     @OneToMany
     @JoinColumn(name = "TEAM_ID")
-    private List<MemberOneWay> members = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
 
 }

@@ -1,9 +1,5 @@
-package com.howard.jpabasic.section6.section6_1;
+package com.howard.jpabasic.section6.section6_1.two_way;
 
-import com.howard.jpabasic.section6.section6_1.one_way.MemberOneWay;
-import com.howard.jpabasic.section6.section6_1.one_way.TeamOneWay;
-import com.howard.jpabasic.section6.section6_1.two_way.MemberTwoWay;
-import com.howard.jpabasic.section6.section6_1.two_way.TeamTwoWay;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -15,10 +11,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@EntityScan(basePackages = {
-        "com.howard.jpabasic.section6.section6_1.one_way",
-        "com.howard.jpabasic.section6.section6_1.two_way"
-})
+@EntityScan(basePackages = {"com.howard.jpabasic.section6.section6_1.two_way"})
 public class Section6Test {
 
     @PersistenceUnit
@@ -34,53 +27,18 @@ public class Section6Test {
     }
 
     @Test
-    @DisplayName("N:1 단방향 - 단방향 연관관계를 가지는 Entity 생성 및 저장, 조회")
-    public void oneWayManyToOneRelationTest() {
-        try {
-            etx.begin();
-
-            /* TeamOneWay Entity 생성 및 영속화 */
-            TeamOneWay team = new TeamOneWay();
-            team.setName("teamA");
-            em.persist(team);
-
-            /* MemberOneWay Entity 생성 및 영속화 */
-            MemberOneWay member = new MemberOneWay();
-            member.setUsername("ryan");
-            member.setTeam(team);
-            em.persist(member);
-
-            /* select query 를 확인하기 위한 목적으로 추가 */
-            em.flush();
-            em.clear();
-
-            /* 단방향 연관관계를 가지는 Member Entity 조회 */
-            MemberOneWay findMember = em.find(MemberOneWay.class, member.getId());
-            System.out.println("findMember.id = " + findMember.getId());
-            System.out.println("findMember.username = " + findMember.getUsername());
-            System.out.println("findMember.team = " + findMember.getTeam());
-
-            etx.commit();
-        } catch (Exception e) {
-            etx.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    @Test
     @DisplayName("N:1 양방향 - 양방향 연관관계를 가지는 Entity 생성 및 저장, 조회")
     public void twoWayManyToOneRelationTest() {
         try {
             etx.begin();
 
             /* TeamTwoWay Entity 생성 및 영속화 */
-            TeamTwoWay team = new TeamTwoWay();
+            Team team = new Team();
             team.setName("teamA");
             em.persist(team);
 
             /* MemberTwoWay Entity 생성 및 영속화 */
-            MemberTwoWay member = new MemberTwoWay();
+            Member member = new Member();
             member.setUsername("ryan");
             member.setTeamRelation(team); // 유틸리티 메서드 활용
             em.persist(member);
@@ -90,7 +48,7 @@ public class Section6Test {
             em.clear();
 
             /* 단방향 연관관계를 가지는 Member Entity 조회 */
-            MemberTwoWay findMember = em.find(MemberTwoWay.class, member.getId());
+            Member findMember = em.find(Member.class, member.getId());
             System.out.println("findMember.id = " + findMember.getId());
             System.out.println("findMember.username = " + findMember.getUsername());
             System.out.println("findMember.team.id = " + findMember.getTeam().getId());

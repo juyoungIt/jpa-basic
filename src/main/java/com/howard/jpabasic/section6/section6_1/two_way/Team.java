@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class TeamTwoWay {
+public class Team {
 
     @Id @GeneratedValue
     private Long id;
@@ -19,6 +19,6 @@ public class TeamTwoWay {
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private List<MemberTwoWay> members = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
 
 }

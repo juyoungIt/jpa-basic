@@ -1,4 +1,4 @@
-package com.howard.jpabasic.section6.section6_1.one_way;
+package com.howard.jpabasic.section6.section6_2.one_way;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,11 +7,11 @@ import lombok.Data;
 
 @Data
 @Entity
-public class TeamOneWay {
+public class Member {
 
     @Id @GeneratedValue
     private Long id;
 
-    private String name;
+    private String username;
 
 }

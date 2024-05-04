@@ -5,19 +5,19 @@ import lombok.Data;
 
 @Data
 @Entity
-public class MemberTwoWay {
+public class Member {
 
     @Id @GeneratedValue
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
-    private TeamTwoWay team;
+    private Team team;
 
     private String username;
 
     /* 양방향 연관관계 세팅을 유용하게 처리하기 위한 유틸리티 메서드 */
-    public void setTeamRelation(TeamTwoWay team) {
+    public void setTeamRelation(Team team) {
         this.team = team;
         team.getMembers().add(this);
     }

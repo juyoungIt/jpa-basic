@@ -5,14 +5,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class MemberOneWay {
+public class Member {
 
     @Id @GeneratedValue
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
-    private TeamOneWay team;
+    private Team team;
 
     private String username;
 
