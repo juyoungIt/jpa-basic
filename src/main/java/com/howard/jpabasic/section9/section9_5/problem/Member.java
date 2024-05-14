@@ -1,4 +1,4 @@
-package com.howard.jpabasic.section9.section9_5;
+package com.howard.jpabasic.section9.section9_5.problem;
 
 import jakarta.persistence.*;
 import lombok.Data;

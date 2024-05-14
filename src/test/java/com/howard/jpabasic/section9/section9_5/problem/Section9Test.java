@@ -1,4 +1,4 @@
-package com.howard.jpabasic.section9.section9_5;
+package com.howard.jpabasic.section9.section9_5.problem;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@EntityScan(basePackages = {"com.howard.jpabasic.section9.section9_5"})
+@EntityScan(basePackages = {"com.howard.jpabasic.section9.section9_5.problem"})
 public class Section9Test {
 
     @PersistenceUnit

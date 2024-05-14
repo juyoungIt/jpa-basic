@@ -1,4 +1,4 @@
-package com.howard.jpabasic.section9.section9_5;
+package com.howard.jpabasic.section9.section9_5.solution_b;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
