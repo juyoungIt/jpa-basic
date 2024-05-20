@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceUnit;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -66,7 +65,7 @@ public class Section10Test {
                     )
                     .getResultList();
 
-            assertThat(findMembers).hasSize(3);
+            assertThat(findMembers).hasSize(2);
             assertThat(findMembers).extracting(MemberDTO::getUsername).containsExactly("memberA", "memberB");
             assertThat(findMembers).extracting(MemberDTO::getAge).containsExactly(20, 30);
             assertThat(findMembers).extracting(MemberDTO::getTeamName).contains("teamA", "teamB");
@@ -205,6 +204,7 @@ public class Section10Test {
 
             Member memberA = new Member();
             memberA.setUsername("memberA");
+            memberA.setTeamRelation(teamA);
             memberA.setAge(20);
             em.persist(memberA);
 
